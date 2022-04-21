@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            
+            <h:commandButton value="Verbindungen laden" action="#{verbindungsBean.ladeDaten()}"/>
+            <h:selectOneMenu id="startbahnhof" value="#{verbindungsBean.startbahnhof}">
+                <f:selectItems value="#{verbindungsBean.bahnhoefe}" var="verbindung" itemLabel="#{verbindung.name}" itemValue="#{verbindung.name}"/>
+             </h:selectOneMenu> 
+            
+            <h:selectOneMenu id="zielbahnhof" value="#{verbindungsBean.zielbahnhof}">
+                <f:selectItems value="#{verbindungsBean.bahnhoefe}" var="verbindung" itemLabel="#{verbindung.name}" itemValue="#{verbindung.name}"/>
+             </h:selectOneMenu> 
+            <br/>
+            <h:commandButton value="Berchne" action="#{verbindungsBean.berechneEntfernungNeu()}"/><br/>
+            <h:outputText value="#{verbindungsBean.entfernung}"/>
+            <br/>
+            <h:outputText value="Alte Abfragen"/> 
+            <h:commandButton action="#{verbindungsBean.loescheAlte}" value="Lösche Alte Verbindungen"/>
+            <h:dataTable value="#{verbindungsBean.alteVerbindungen}" var="verbind" border="1">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Startbahnhof"/>
+                    </f:facet>
+                    <h:outputText value="#{verbind.startbahnhof}"/>
+                </h:column> 
+                 <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Zielbahnhof"/>
+                    </f:facet>
+                     <h:outputText value="#{verbind.zielbahnhof}"/>
+                </h:column> 
+                 <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Entfernung"/>
+                    </f:facet>
+                     <h:outputText value="#{verbind.entfernung}"/>
+                </h:column> 
+            
+            </h:dataTable>
+            
+            
+        </h:form>
+       
+    </h:body>
+</html>
+
